@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+    <title>fete</title>
+    <style>
+        *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    
+}
+
+body{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-image: url(fete1.jpg);
+  
+    background-size: cover;
+  
+    /*background-color: rgb(179, 136, 136);*/
+
+}
+.wrapper{
+    width: 1000px;
+opacity: 0.8;
+    border-radius: 30px;
+    background-color: transparent;
+    border: 1px solid (252, 123, 2);}
+#time{
+    display: flex;
+    gap: 40px;
+    align-items: center;
+    justify-content: center;
+ 
+
+}
+#time .care{
+    position: relative;
+    width: 150px;
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+ 
+}
+#time .care svg{
+    position:relative;
+    width: 150px;
+    height: 150px;
+}
+#time .care svg circle{
+    width: 100%;
+    height: 100%;
+    fill: transparent;
+    stroke: #3E5151;
+    stroke-width: 4;
+    transform: translate(5px,5px);
+
+}
+#time .care svg circle:nth-child(2){
+    stroke :var(--clr);
+
+}
+
+#time div{
+    position: absolute;
+    text-align: center;
+    font-weight: 500;
+    font-size: 1.5em;
+
+
+}
+
+    </style>
+</head>
+<body>
+<div class="wrapper ">
+
+    <div class="card text-center">
+        <div class="card-header">
+          <h2 style="font-family: 'Bilbo', cursive; font-weight: 600;" > Katia & Amine </h2>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title" style=" font-weight: 700;">
+            wedding</h5>
+          <h4 class="card-text" style=" font-weight: 700;">
+            It remains for the wedding date.</h4>
+
+            <div id="time" data-time="2023-05-04T17:28:34+0000">
+
+                <div class="care" style="--clr:red;">
+                    <svg>
+                        <circle cx="70" cy="70" r="70"></circle>
+                        <circle cx="70" cy="70" r="70"></circle>
+                    </svg>
+         
+                  <div id="days">90 </div>
+                   
+                </div>
+                <div class="care"  style="--clr:yellow;">
+                    <svg>
+                        <circle cx="70" cy="70" r="70"></circle>
+                        <circle cx="70" cy="70" r="70"></circle>
+                    </svg>
+                    <div id="hours">22<p>Hours</p></div>
+
+                </div>
+                <div class="care"  style="--clr:green;">
+                    <svg>
+                        <circle cx="70" cy="70" r="70"></circle>
+                        <circle cx="70" cy="70" r="70"></circle>
+                    </svg>
+                    <div id="minutes">54<p>Min</p></div>
+
+                </div>
+                <div class="care"  style="--clr:orange;">
+                    <svg>
+                        <circle cx="70" cy="70" r="70"></circle>
+                        <circle cx="70" cy="70" r="70"></circle>
+                    </svg>
+                    <div id="second">00 <p>Sec</p></div>
+
+                </div>
+
+            </div>
+        
+        </div>
+        <div   class="card-footer text-muted" style=" font-weight: 800;">
+         <h1 id="DEGO"> </h1>
+        </div>
+      </div>
+
+</div>
+<script>
+
+    const Minutes = 60
+    const Hours = 60 * Minutes
+    const Days = 24 * Hours
+    
+    function refreshcountdown() {
+    //1 calculer la differance en seconde  entre les 2 datte 
+    const countdown = document.querySelector('#time');
+    //DATE.PARSE POUR ABTENU UN VALEUR EN ms
+    //je divise sur 1000 pour obtenu la valeur rn seconde
+    const launchdown = Date.parse(countdown.dataset.time)/1000
+    const differance =launchdown-Date.now()/1000
+    const diff ={
+        days: Math.floor(differance/Days),
+        hours: Math.floor(differance % Days / Hours),
+        minutes: Math.floor(differance % Hours / Minutes),
+        seconds: Math.floor(differance % Minutes)
+    }
+   
+   
+   document.getElementById('days').innerText = diff.days +"days "
+   document.getElementById('hours').innerText = diff.hours + "H"
+   document.getElementById('minutes').innerText = diff.minutes + "M"
+   document.getElementById('second').innerText = diff.seconds+"S"
+   
+   document.getElementById('DEGO').innerText ="rest" +" " +  diff.days+" " +"Jours"
+   window.setTimeout(refreshcountdown, 1000)
+
+    }
+    refreshcountdown()
+    //2 on cree un objet qui contien les heures ....
+  
+
+    //on va envoyer cet objet a une fonction qui a mettra a jour l html 
+    //modifier l html 
+
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
+</body>
+</html>
